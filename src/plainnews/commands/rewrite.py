@@ -25,6 +25,12 @@ def runtime_options(function):
         default=None,
         help="Bedrock model id. Falls back to BEDROCK_MODEL_ID if unset.",
     )
+    @click.option(
+        "--language",
+        default="English",
+        show_default=True,
+        help="Output language for the rewritten article.",
+    )
     @wraps(function)
     def wrapper(*args, **kwargs):
         return function(*args, **kwargs)
@@ -40,6 +46,7 @@ def rewrite_command(
     aws_profile: str | None,
     region: str | None,
     model: str | None,
+    language: str,
 ) -> None:
     """Rewrite a news article from its URL."""
 
@@ -56,7 +63,7 @@ def rewrite_command(
     try:
         agent = create_agent(settings=settings)
         with console.status("Rewriting the article with Bedrock...", spinner="dots"):
-            result = agent(build_rewrite_prompt(url))
+            result = agent(build_rewrite_prompt(url, language=language))
     except Exception as error:
         raise click.ClickException(str(error)) from error
 

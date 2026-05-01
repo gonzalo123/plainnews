@@ -7,12 +7,18 @@ def test_build_rewrite_prompt_contains_url() -> None:
 
     assert "https://example.com/news" in prompt
     assert "available tool" in prompt
-    assert "same language as the article" in prompt
+    assert "Write the full answer in English." in prompt
 
 
-def test_system_prompt_preserves_article_language() -> None:
-    assert "same language" in SYSTEM_PROMPT
-    assert "article language" in SYSTEM_PROMPT
+def test_build_rewrite_prompt_accepts_output_language() -> None:
+    prompt = build_rewrite_prompt("https://example.com/news", language="Spanish")
+
+    assert "Write the full answer in Spanish." in prompt
+
+
+def test_system_prompt_uses_requested_output_language() -> None:
+    assert "requested by the user" in SYSTEM_PROMPT
+    assert "requested output language" in SYSTEM_PROMPT
 
 
 def test_default_model_id() -> None:
