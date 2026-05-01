@@ -7,6 +7,8 @@ from markdownify import markdownify as md
 from requests import RequestException
 from strands import tool
 
+from plainnews.settings import get_settings
+
 DEFAULT_TIMEOUT_SECONDS = 15
 DEFAULT_MAX_MARKDOWN_CHARS = 100_000
 USER_AGENT = "PlainNews/0.1 (+https://github.com/gonzalo123/plainnews)"
@@ -114,4 +116,9 @@ def fetch_url_as_markdown(url: str) -> str:
     Use this tool when the user pastes a URL or asks you to analyze a web page.
     """
 
-    return fetch_url_as_markdown_impl(url)
+    settings = get_settings()
+    return fetch_url_as_markdown_impl(
+        url,
+        timeout_seconds=settings.request_timeout_seconds,
+        max_chars=settings.max_markdown_chars,
+    )

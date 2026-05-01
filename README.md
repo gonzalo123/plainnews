@@ -143,15 +143,17 @@ def create_agent(*, settings: Settings) -> Agent:
 ```
 
 The system prompt is the editorial policy. It tells the model to preserve only
-facts supported by the fetched article, put the most important information first,
-remove suspense and filler, and write in a neutral tone.
+facts supported by the fetched article, detect the article language, answer in
+that same language, put the most important information first, remove suspense and
+filler, and write in a neutral tone.
 
 The output format is Markdown:
 
 - a direct H1 headline
 - a concise lead paragraph
 - short factual paragraphs
-- a final `What changed` section explaining what noise was removed
+- a final `What changed` section, translated to the article language, explaining
+  what noise was removed
 
 That last section is useful during development. It gives us a quick sanity check:
 did the model actually remove clickbait, or did it just paraphrase the article?

@@ -1,7 +1,9 @@
 import requests
 
+from plainnews.settings import Settings
 from plainnews.lib.tools import (
     clean_html_to_markdown,
+    fetch_url_as_markdown,
     fetch_url_as_markdown_impl,
     is_supported_url,
 )
@@ -101,6 +103,29 @@ def test_fetch_converts_successful_response(monkeypatch) -> None:
     result = fetch_url_as_markdown_impl("https://example.com/article")
 
     assert "Hello news" in result
+
+
+def test_tool_uses_configured_fetch_settings(monkeypatch) -> None:
+    calls = {}
+    settings = Settings(request_timeout_seconds=3, max_markdown_chars=42)
+
+    def fake_fetch(url: str, *, timeout_seconds: int, max_chars: int) -> str:
+        calls["url"] = url
+        calls["timeout_seconds"] = timeout_seconds
+        calls["max_chars"] = max_chars
+        return "Configured markdown"
+
+    monkeypatch.setattr("plainnews.lib.tools.get_settings", lambda: settings)
+    monkeypatch.setattr("plainnews.lib.tools.fetch_url_as_markdown_impl", fake_fetch)
+
+    result = fetch_url_as_markdown("https://example.com/article")
+
+    assert result == "Configured markdown"
+    assert calls == {
+        "url": "https://example.com/article",
+        "timeout_seconds": 3,
+        "max_chars": 42,
+    }
 
 
 def test_supported_url_validation() -> None:
