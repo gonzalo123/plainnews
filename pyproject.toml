@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "plainnews"
+version = "0.1.0"
+description = "Rewrite clickbait news articles into clear Markdown with Strands Agents and AWS Bedrock"
+license = "MIT"
+authors = ["Gonzalo Ayuso <gonzalo123@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/gonzalo123/plainnews"
+repository = "https://github.com/gonzalo123/plainnews"
+documentation = "https://github.com/gonzalo123/plainnews#readme"
+keywords = ["ai", "agents", "news", "bedrock", "cli", "markdown"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing :: Markup :: Markdown",
+]
+packages = [{include = "plainnews", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+beautifulsoup4 = "^4.14.2"
+boto3 = "^1.42.78"
+click = "^8.3.1"
+markdownify = "^1.2.2"
+pydantic = "^2.12.3"
+pydantic-settings = "^2.13.1"
+python-dotenv = "^1.2.2"
+requests = "^2.32.5"
+rich = "^14.3.0"
+strands-agents = "^1.34.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+
+[tool.poetry.scripts]
+plainnews = "plainnews.cli:cli"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
