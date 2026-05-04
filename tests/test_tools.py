@@ -1,7 +1,7 @@
 import requests
 
-from plainnews.settings import Settings
-from plainnews.lib.tools import (
+from settings import Settings
+from lib.tools import (
     clean_html_to_markdown,
     fetch_url_as_markdown,
     fetch_url_as_markdown_impl,
@@ -86,7 +86,7 @@ def test_fetch_handles_request_error(monkeypatch) -> None:
     def fake_get(*args, **kwargs):
         raise requests.Timeout("too slow")
 
-    monkeypatch.setattr("plainnews.lib.tools.requests.get", fake_get)
+    monkeypatch.setattr("lib.tools.requests.get", fake_get)
 
     result = fetch_url_as_markdown_impl("https://example.com/article")
 
@@ -98,7 +98,7 @@ def test_fetch_converts_successful_response(monkeypatch) -> None:
     def fake_get(*args, **kwargs):
         return FakeResponse("<html><body><article><p>Hello news</p></article></body></html>")
 
-    monkeypatch.setattr("plainnews.lib.tools.requests.get", fake_get)
+    monkeypatch.setattr("lib.tools.requests.get", fake_get)
 
     result = fetch_url_as_markdown_impl("https://example.com/article")
 
@@ -115,8 +115,8 @@ def test_tool_uses_configured_fetch_settings(monkeypatch) -> None:
         calls["max_chars"] = max_chars
         return "Configured markdown"
 
-    monkeypatch.setattr("plainnews.lib.tools.get_settings", lambda: settings)
-    monkeypatch.setattr("plainnews.lib.tools.fetch_url_as_markdown_impl", fake_fetch)
+    monkeypatch.setattr("lib.tools.get_settings", lambda: settings)
+    monkeypatch.setattr("lib.tools.fetch_url_as_markdown_impl", fake_fetch)
 
     result = fetch_url_as_markdown("https://example.com/article")
 

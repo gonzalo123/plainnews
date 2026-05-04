@@ -21,7 +21,10 @@ build/
 # Local environment files
 .env
 .env.*
-src/plainnews/env/local/.env
+!src/
+!src/env/
+!src/env/local/
+!src/env/local/.env
 
 # OS and editor noise
 .DS_Store

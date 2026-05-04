@@ -22,7 +22,13 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Text Processing :: Markup :: Markdown",
 ]
-packages = [{include = "plainnews", from = "src"}]
+packages = [
+    {include = "__main__.py", from = "src"},
+    {include = "cli.py", from = "src"},
+    {include = "settings.py", from = "src"},
+    {include = "commands", from = "src"},
+    {include = "lib", from = "src"},
+]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"
@@ -41,7 +47,7 @@ strands-agents = "^1.34.1"
 pytest = "^8.4.2"
 
 [tool.poetry.scripts]
-plainnews = "plainnews.cli:cli"
+plainnews = "cli:cli"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

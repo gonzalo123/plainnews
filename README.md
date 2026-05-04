@@ -40,7 +40,7 @@ This keeps the PoC small and easy to reason about.
 I like to keep configuration in `settings.py`. It is a pattern I borrowed years ago from Django and I still use it in small prototypes because it keeps things simple:
 
 ```text
-src/plainnews/
+src/
   cli.py
   settings.py
   commands/
@@ -52,17 +52,17 @@ src/plainnews/
     ui.py
   env/
     local/
-      .env.example
+      .env
 tests/
 ```
 
 The responsibilities are intentionally small:
 
-- `plainnews/commands/rewrite.py` contains the Click command.
-- `plainnews/lib/tools.py` contains the Strands tool and the HTML-to-Markdown pipeline.
-- `plainnews/lib/agent.py` wires Strands Agents with AWS Bedrock.
-- `plainnews/lib/prompts.py` keeps the editor prompt and the user task prompt.
-- `plainnews/lib/ui.py` renders Markdown in the terminal with Rich.
+- `commands/rewrite.py` contains the Click command.
+- `lib/tools.py` contains the Strands tool and the HTML-to-Markdown pipeline.
+- `lib/agent.py` wires Strands Agents with AWS Bedrock.
+- `lib/prompts.py` keeps the editor prompt and the user task prompt.
+- `lib/ui.py` renders Markdown in the terminal with Rich.
 
 ## Fetching a URL as Markdown
 

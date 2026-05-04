@@ -1,6 +1,6 @@
 from click.testing import CliRunner
 
-from plainnews.cli import cli
+from cli import cli
 
 
 class FakeAgent:
@@ -25,7 +25,7 @@ def test_rewrite_rejects_non_http_url() -> None:
 
 
 def test_rewrite_accepts_url_and_renders_result(monkeypatch) -> None:
-    monkeypatch.setattr("plainnews.commands.rewrite.create_agent", lambda *, settings: FakeAgent())
+    monkeypatch.setattr("commands.rewrite.create_agent", lambda *, settings: FakeAgent())
 
     result = CliRunner().invoke(cli, ["rewrite", "https://example.com/article"])
 
@@ -35,7 +35,7 @@ def test_rewrite_accepts_url_and_renders_result(monkeypatch) -> None:
 
 
 def test_rewrite_accepts_output_language(monkeypatch) -> None:
-    monkeypatch.setattr("plainnews.commands.rewrite.create_agent", lambda *, settings: SpanishFakeAgent())
+    monkeypatch.setattr("commands.rewrite.create_agent", lambda *, settings: SpanishFakeAgent())
 
     result = CliRunner().invoke(
         cli,

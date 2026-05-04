@@ -2,9 +2,9 @@ from boto3.session import Session
 from strands import Agent
 from strands.models import BedrockModel
 
-from plainnews.lib.prompts import SYSTEM_PROMPT
-from plainnews.lib.tools import fetch_url_as_markdown
-from plainnews.settings import Settings, create_boto_session
+from lib.prompts import SYSTEM_PROMPT
+from lib.tools import fetch_url_as_markdown
+from settings import Settings, create_boto_session
 
 
 def create_agent(*, settings: Settings) -> Agent:

@@ -2,11 +2,11 @@ from functools import wraps
 
 import click
 
-from plainnews.lib.agent import create_agent
-from plainnews.lib.prompts import build_rewrite_prompt
-from plainnews.lib.tools import is_supported_url
-from plainnews.lib.ui import get_console, print_result
-from plainnews.settings import resolve_settings
+from lib.agent import create_agent
+from lib.prompts import build_rewrite_prompt
+from lib.tools import is_supported_url
+from lib.ui import get_console, print_result
+from settings import resolve_settings
 
 
 def runtime_options(function):

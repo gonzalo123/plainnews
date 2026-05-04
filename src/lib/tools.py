@@ -7,7 +7,7 @@ from markdownify import markdownify as md
 from requests import RequestException
 from strands import tool
 
-from plainnews.settings import get_settings
+from settings import get_settings
 
 DEFAULT_TIMEOUT_SECONDS = 15
 DEFAULT_MAX_MARKDOWN_CHARS = 100_000

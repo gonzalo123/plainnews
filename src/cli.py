@@ -1,6 +1,6 @@
 import click
 
-from plainnews.commands.rewrite import rewrite_command
+from commands.rewrite import rewrite_command
 
 
 @click.group()
